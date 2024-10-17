@@ -75,7 +75,7 @@ def download_yt(message, url):
         # Define download options for yt-dlp
         ydl_opts = {
 
-            'format': 'bestvideo+bestaudio[ext=mp4]/mp4',
+            'format': 'mp4',
             'outtmpl': 'downloads/%(title)s.%(ext)s',
         }
 
@@ -84,6 +84,7 @@ def download_yt(message, url):
             file_path = ydl.prepare_filename(info_dict)
 
         # Send the video file to the user
+        bot.send_message(message.chat.id, "Download successfull sending video...")
         with open(file_path, 'rb') as video_file:
             bot.send_video(message.chat.id, video_file)
 
@@ -109,6 +110,7 @@ def download_yt_audio_only(message, url):
             file_path = ydl.prepare_filename(info_dict)
 
         # Send the video file to the user
+        bot.send_message(message.chat.id, "Download successfull sending audio...")
         with open(file_path, 'rb') as video_file:
             bot.send_video(message.chat.id, video_file)
 
