@@ -1,7 +1,6 @@
 import os
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
-import instaloader
 import yt_dlp
 from dotenv import load_dotenv
 
@@ -45,7 +44,7 @@ def youtube_handler(call):
 # Instagram downloader function
 def download_insta(username, password, message, url):
     try:
-        bot.send_message(message.chat.id, "Downloading Instagram reel...")
+        bot.send_message(message.chat.id, "⏬ Downloading Instagram reel...")
 
         ytdl_opts = {
             'username': username,
@@ -57,7 +56,7 @@ def download_insta(username, password, message, url):
         with yt_dlp.YoutubeDL(ytdl_opts) as ytdl:
             info_dict = ytdl.extract_info(url, download=True)
             file_path = ytdl.prepare_filename(info_dict)
-
+        bot.send_message(message.chat.id, "⚡ Video Downloaded sending it now...")
         with open(file_path, 'rb') as video_file:
             bot.send_video(message.chat.id, video_file)
 
@@ -70,7 +69,7 @@ def download_insta(username, password, message, url):
 # YouTube downloader function
 def download_yt(message, url):
     try:
-        bot.send_message(message.chat.id, "Downloading YouTube video...")
+        bot.send_message(message.chat.id, "⏬ Downloading YouTube video...")
 
         # Define download options for yt-dlp
         ydl_opts = {
@@ -84,7 +83,7 @@ def download_yt(message, url):
             file_path = ydl.prepare_filename(info_dict)
 
         # Send the video file to the user
-        bot.send_message(message.chat.id, "Download successfull sending video...")
+        bot.send_message(message.chat.id, "⚡ Download successfull sending video...")
         with open(file_path, 'rb') as video_file:
             bot.send_video(message.chat.id, video_file)
 
@@ -96,7 +95,7 @@ def download_yt(message, url):
 
 def download_yt_audio_only(message, url):
     try:
-        bot.send_message(message.chat.id, "Downloading YouTube audio...")
+        bot.send_message(message.chat.id, "⏬ Downloading YouTube audio...")
 
         # Define download options for yt-dlp
         ydl_opts = {
@@ -110,7 +109,7 @@ def download_yt_audio_only(message, url):
             file_path = ydl.prepare_filename(info_dict)
 
         # Send the video file to the user
-        bot.send_message(message.chat.id, "Download successfull sending audio...")
+        bot.send_message(message.chat.id, "⚡ Download successfull sending audio...")
         with open(file_path, 'rb') as video_file:
             bot.send_video(message.chat.id, video_file)
 
